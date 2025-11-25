@@ -1,0 +1,20 @@
+[
+    {
+        "id": "123456",
+        "email": "admin@example.com",
+        "passwordHash": "$2b$10$06GcA2.f89JObLh/JiB44.GOSVxpcklDHKuIDKEQ/WLLI9efv6dT2",
+        "role": "admin"
+    },
+    {
+        "id": "844562",
+        "email": "user@example.com",
+        "passwordHash": "$2b$10$06GcA2.f89JObLh/JiB44.GOSVxpcklDHKuIDKEQ/WLLI9efv6dT2",
+        "role": "user"
+    },
+    {
+        "id": "1763991766291",
+        "email": "util@example.com",
+        "passwordHash": "$2b$10$.xj31ITIcC30RMbXUxLd7Ow/QfbE0C7dPoJuV82WamZqmW0qIB55S",
+        "role": "user"
+    }
+]
