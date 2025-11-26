@@ -1,4 +1,22 @@
-{
-    "producId": "001",
-    "quantity": 40
-}
+[
+    {
+        "id": 1764064464765,
+        "userId": "123456",
+        "items": [
+            {
+                "productId": "9",
+                "quantity": 6
+            }
+        ]
+    },
+    {
+        "id": 1764065861399,
+        "userId": "844562",
+        "items": [
+            {
+                "productId": "10",
+                "quantity": 2
+            }
+        ]
+    }
+]

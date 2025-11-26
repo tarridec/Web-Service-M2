@@ -1,17 +1,17 @@
 import path from 'path';
 import { Product } from '../types';
-import { FILE_JSON } from '../utils/constants';
+import { FILE_JSON_PRODUCTS } from '../utils/constants';
 import { parseJsonFile, writeJsonFile } from '../utils/utils';
 
 export const getProductsJson = async () => {
-  return await parseJsonFile<Product[]>(path.resolve(FILE_JSON));
+  return await parseJsonFile<Product[]>(path.resolve(FILE_JSON_PRODUCTS));
 };
 
 export const newProductsJson = async (data: Product[]) => {
-  return await writeJsonFile(path.resolve(FILE_JSON), data);
+  return await writeJsonFile(path.resolve(FILE_JSON_PRODUCTS), data);
 };
 
-export const createNewProduct = (product: Omit<Product, 'id'>): Product => {
+export const createNewIdProduct = (product: Omit<Product, 'id'>): Product => {
   return {
     id: Date.now(),
     ...product,
@@ -36,6 +36,12 @@ export const getListProduct = async (limit: number, page: number, s: any) => {
   return data ?? [];
 };
 
+export const listProduct = async () => {
+  let data = await getProductsJson();
+
+  return data ?? [];
+};
+
 const researchProduct = (research: string, data: Product[]): Product[] => {
   const valueLower = research.toLowerCase();
 
@@ -50,7 +56,7 @@ const researchProduct = (research: string, data: Product[]): Product[] => {
 export const postProduct = async (body: Omit<Product, 'id'>) => {
   const data = await getProductsJson();
 
-  const newProduct = createNewProduct(body);
+  const newProduct = createNewIdProduct(body);
 
   data.push(newProduct);
 

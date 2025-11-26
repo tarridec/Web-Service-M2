@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Order } from "../types/order.type";
-import { postOrder } from "../services/orders.service";
+import { getOrderList, postOrder } from "../services/orders.service";
 
 export const create = async (req: Request, res: Response) => {
     const { items } = req.body ?? {};
@@ -25,12 +25,12 @@ export const create = async (req: Request, res: Response) => {
 };
 
 export const getMyOrders = async (_req: Request, res: Response) => {
-    try {
-        const order: Order[] = [];
-        res.status(200).json({order});
-    } catch (error) {
-        res.status(400).json({message: "Erreur dans les données"});
-    }
+    const user = (_req as any).user;
+
+
+    const data = await getOrderList(user.id);
+
+    res.status(200).json(data);
 };
 
 export const getById = async (_req: Request, res: Response) => {
