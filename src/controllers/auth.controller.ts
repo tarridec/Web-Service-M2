@@ -12,12 +12,12 @@ export const login = async (req: Request, res: Response, _next: NextFunction) =>
   }
 
   const user: User | undefined = await getUsersByEmail(email);
-  
+
   if(!user)
     return res.status(401).json({message: 'Informations de login invalides'});
-  
+
   const isAuthenticated: boolean =await loginService(email, password);
-  
+
   if(isAuthenticated) {
     const token = sign ({ id: user.id, role: user.role, email: user.email }, '2h');
   res.json({ token });

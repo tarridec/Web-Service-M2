@@ -1,10 +1,15 @@
 import express, { Router } from 'express';
-import { get, getList, patch, post, put, remove } from '../controllers/products.controller';
+import { get, getList, patch, patchMongo, post, postMongo, put, putMongo, remove, seed } from '../controllers/products.controller';
 import { auth, authorize } from '../middlewares/auth.middlewares';
 import { RoleEnum } from '../types/role';
 
 const productsRouter: Router = express.Router();
 
+
+productsRouter.post('/seed', seed);
+productsRouter.post('/seed-post', postMongo);
+productsRouter.put('/seed-put/:id', putMongo);
+productsRouter.patch('/seed-patch/:id', patchMongo);
 /**
  * @swagger
  * /products:

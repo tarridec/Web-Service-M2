@@ -30,9 +30,11 @@
         <part name="products" type="pns:Product"/>
     </message>
 
-    <message name="GetProductRequest"/>
+    <message name="GetProductRequest">
+        <part name="id" type="xsd:int"/>
+    </message>
     <message name="GetProductResponse">
-        <part name="products" type="pns:Product"/>
+        <part name="product" type="pns:Product"/>
     </message>
 
     <message name="DeleteProductRequest"/>
@@ -45,38 +47,44 @@
         <part name="products" type="pns:Product"/>
     </message>
 
+    <message name="UpdateProductRequest"/>
+    <message name="UpdateProductResponse">
+        <part name="products" type="pns:Product"/>
+    </message>
+
     <!-- Liste des opérations disponibles -->
     <portType name="ProductsServicePort">
         <operation name="ListProducts">
             <input message="pns:ListProductsRequest"/>
             <output message="pns:ListProductsResponse"/>
         </operation>
-    </portType>
-
-    <portType name="ProductsServicePort">
+        
         <operation name="GetProduct">
             <input message="pns:GetProductRequest"/>
             <output message="pns:GetProductResponse"/>
         </operation>
-    </portType>
-
-    <portType name="ProductsServicePort">
+        
         <operation name="DeleteProduct">
             <input message="pns:DeleteProductRequest"/>
             <output message="pns:DeleteProductResponse"/>
         </operation>
-    </portType>
-
-    <portType name="ProductsServicePort">
+        
         <operation name="AddProduct">
             <input message="pns:AddProductRequest"/>
             <output message="pns:AddProductResponse"/>
+        </operation>
+        
+        <operation name="UpdateProduct">
+            <input message="pns:UpdateProductRequest"/>
+            <output message="pns:UpdateProductResponse"/>
         </operation>
     </portType>
 
     <!-- Liaison SOAP -->
     <binding name="ProductsServiceBinding" type="pns:ProductsServicePort">
         <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+        <!-- Opération Liste des produits -->
         <operation name="ListProducts">
             <soap:operation soapAction="ListProducts"/>
             <input>
@@ -90,10 +98,8 @@
                             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
-    </binding>
-
-    <binding name="ProductsServiceBinding" type="pns:ProductsServicePort">
-        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        
+        <!-- Opération Récupération d'un produit -->
         <operation name="GetProduct">
             <soap:operation soapAction="GetProduct"/>
             <input>
@@ -107,10 +113,8 @@
                             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
-    </binding>
-
-    <binding name="ProductsServiceBinding" type="pns:ProductsServicePort">
-        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        
+        <!-- Opération Supprimer un produit -->
         <operation name="DeleteProduct">
             <soap:operation soapAction="DeleteProduct"/>
             <input>
@@ -124,12 +128,25 @@
                             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
-    </binding>
-
-    <binding name="ProductsServiceBinding" type="pns:ProductsServicePort">
-        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        
+        <!-- Opération Ajouter un nouveau produit -->
         <operation name="AddProduct">
             <soap:operation soapAction="AddProduct"/>
+            <input>
+                <soap:body use="encoded"
+                            namespace="http://localhost:4000/soap/products"
+                            encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded"
+                            namespace="http://localhost:4000/soap/products"
+                            encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        
+        <!-- Opération Mettre à jour un produit -->
+        <operation name="UpdateProduct">
+            <soap:operation soapAction="UpdateProduct"/>
             <input>
                 <soap:body use="encoded"
                             namespace="http://localhost:4000/soap/products"
