@@ -98,12 +98,12 @@ export const newProductsJson = async (data: Product[]) => {
 
 export const createNewIdProduct = (product: Omit<Product, 'id'>): Product => {
   return {
-    id: Date.now(),
+    id: String(Date.now()),
     ...product,
   };
 };
 
-export const getProductFromId = async (id: number) => {
+export const getProductFromId = async (id: string) => {
   return (await getProductsJson()).filter((product) => product.id === id)[0];
 };
 
@@ -190,7 +190,7 @@ export const saveProduct = async (product: Product) => {
   return false;
 };
 
-export const removeProduct = async (id: number) => {
+export const removeProduct = async (id: string) => {
   const data = await getProductsJson();
 
   const objWithIdIndex = data.findIndex((p) => p.id === id);

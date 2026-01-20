@@ -21,17 +21,9 @@ app.use(health);
 app.use(helmet());
 app.use(cors()); // Autorise tout le monde (origin: '*')
 
-// const corsOptions: CorsOptions = {
-//     origin: ['http://localhost:3000', 'http://mon-app.fr'],
-//     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-//     allowedHeaders: ['Content-Type', 'Authorization'],
-// };
-
-// app.use(cors(corsOptions));
-
 app.use('/api/v1', routes);
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
-app.use(notFound);
+
 
 export default app;

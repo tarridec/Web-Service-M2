@@ -1,9 +1,9 @@
 export interface Product {
-    id: number,
+    id: string,
     title: string,
-    category?: string,
-    ean?: string,
-    description?: string,
-    specs?: string,
+    category?: string | null,
+    ean?: string | null,
+    description?: string | null,
+    specs?: string | null,
     price: number,
 }

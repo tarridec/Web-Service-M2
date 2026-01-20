@@ -17,7 +17,7 @@ describe('Products API', () => {
   const missingData = {
     title: 'Test cool 1',
   };
-  let productId: number | undefined;
+  let productId: string | undefined;
 
   beforeEach(async () => {
     const { success, newProduct } = await postProduct(data);
@@ -56,7 +56,7 @@ describe('Products API', () => {
         });
     });
     describe('GET /products avec pagination', () => {
-      const arrayIdToDelete: number[] = [];
+      const arrayIdToDelete: string[] = [];
 
       beforeEach(async () => {
         for (let index = 0; index < 20; index++) {

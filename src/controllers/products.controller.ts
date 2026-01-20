@@ -152,7 +152,7 @@ export const post = async (req: Request, res: Response) => {
 };
 
 export const patch = async (req: Request, res: Response) => {
-  const idParams = Number(req.params.id);
+  const idParams = String(req.params.id);
   const { title, category, ean, specs, price } = req.body ?? {};
 
   if (!(title && category && ean && specs && price)) {
@@ -176,7 +176,7 @@ export const patch = async (req: Request, res: Response) => {
 };
 
 export const put = async (req: Request, res: Response) => {
-  const idParams = Number(req.params.id);
+  const idParams = String(req.params.id);
   const { title, category, ean, specs, price } = req.body ?? {};
 
   if (!(title && category && ean && specs && price)) {
