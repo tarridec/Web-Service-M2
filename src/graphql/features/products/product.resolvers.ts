@@ -1,5 +1,8 @@
 import { GraphQLContext } from '../../types/graphql-context.type';
 import { GraphQLError } from 'graphql';
+import { requireAuth } from '../../utils/require-auth.utils';
+import { requireRole } from '../../utils/require-role.utils';
+import { RoleEnum } from '../../../types/role';
 
 export const productsResolvers = {
     Query: {
@@ -9,6 +12,9 @@ export const productsResolvers = {
 
     Mutation: {
         createProduct: async (_: any, args: any, ctx: GraphQLContext) => {
+            requireAuth(ctx);
+            requireRole(ctx, RoleEnum.admin);
+
             const result = await ctx.services.products.createProduct(args.input);
 
             if (result.success) {
@@ -19,6 +25,8 @@ export const productsResolvers = {
         },
 
         updateProduct: async (_: any, args: any, ctx: GraphQLContext) => {
+            requireRole(ctx, RoleEnum.admin);
+            
             const result = await ctx.services.products.updateProduct(args.id, args.input);
 
             if (result.success) {
@@ -29,6 +37,8 @@ export const productsResolvers = {
         },
 
         deleteProduct: async (_: any, args: any, ctx: GraphQLContext) => {
+            requireRole(ctx, RoleEnum.admin);
+            
             const result = await ctx.services.products.deleteProduct(args.id);
 
             if (result.success) {

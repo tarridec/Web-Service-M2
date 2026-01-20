@@ -18,7 +18,6 @@ export const login = async (email: string, password: string): Promise<{isAuthent
     }
     
     const token = sign ({ id: user.id, role: user.role, email: user.email }, '2h');
-    //res.json({ token });
 
     return {isAuthenticated, token};
 
