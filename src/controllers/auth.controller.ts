@@ -11,17 +11,10 @@ export const login = async (req: Request, res: Response, _next: NextFunction) =>
     return res.status(400).json({ message: 'Paramètres incorrects' })
   }
 
-  const user: User | undefined = await getUsersByEmail(email);
-
-  if(!user)
-    return res.status(401).json({message: 'Informations de login invalides'});
-
-  const isAuthenticated: boolean =await loginService(email, password);
-
-  if(isAuthenticated) {
-    const token = sign ({ id: user.id, role: user.role, email: user.email }, '2h');
-  res.json({ token });
-  return;
+  const login = await loginService(email, password)
+  
+  if (login.isAuthenticated && login.token) {
+    return res.status(200).json({accessToken: login.token})
   } else {
     return res.status(401).json({message: 'Informations de login invalides'})
   }

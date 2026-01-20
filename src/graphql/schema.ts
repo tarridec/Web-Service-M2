@@ -1,9 +1,9 @@
 import { productsTypeDefs } from "./features/products/products.typeDefs";
+import { authTypeDefs } from "./features/auth/auth.typeDefs";
 
 const baseTypeDefs = `
     type Query
-    
-    `;
-    
-    export const typeDefs = [baseTypeDefs, productsTypeDefs];
-    //type Mutation
+    type Mutation
+`;
+
+export const typeDefs = [baseTypeDefs, productsTypeDefs, authTypeDefs];

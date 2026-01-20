@@ -51,7 +51,8 @@ export const createProduct = async (body: Omit<Product, 'id'>) => {
   return { success: false };
 };
 
-export const updateProduct = async (id: string, payload: Product) => {
+// Requète de type PUT (remplace toute la ressource)
+export const replaceProduct = async (id: string, payload: Product) => {
   const updatedProduct = await ProductModel.findOneAndReplace(
     { _id: id},
     { ...payload },
@@ -63,7 +64,8 @@ export const updateProduct = async (id: string, payload: Product) => {
   return { success: false };
 };
 
-export const updateProd = async (id: string, payload: Product) => {
+// Requète de type PATCH (modifie une partie de la ressource)
+export const updateProduct = async (id: string, payload: Product) => {
   const updatedProduct = await ProductModel.findByIdAndUpdate(
     id,
     { ...payload },
@@ -81,7 +83,6 @@ export const deleteProduct = async (id: string) => {
     return { success: true };
   }
   return { success: false };
-  
 }
 
 

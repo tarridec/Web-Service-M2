@@ -13,7 +13,7 @@ export const productsTypeDefs = `
         updatedAt: DateTime
     }
 
-    type CreateProductInput {
+    input CreateProductInput {
         title: String!
         category: String!
         ean: String!
@@ -22,7 +22,7 @@ export const productsTypeDefs = `
         price: Float!
     }
 
-    type UpdateProductInput {
+    input UpdateProductInput {
         title: String
         category: String
         ean: String
@@ -33,13 +33,12 @@ export const productsTypeDefs = `
     
     extend type Query {
         products: [Product!]!
+        product(id: ID!): Product
     }
         
+    extend type Mutation {
+        createProduct(input: CreateProductInput): Product!
+        updateProduct(id: ID!, input: UpdateProductInput): Product!
+        deleteProduct(id: ID!): Boolean!
+    }
 `;
-        // product(id: ID!): Product
-        
-        // extend type Mutation {
-        //     createProduct(input: CreateProductInput): Product!
-        //     updateProduct(id: ID!, input: UpdateProductInput): Product!
-        //     deleteProduct(id: ID!): Boolean!
-        //     }

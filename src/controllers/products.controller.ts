@@ -8,7 +8,7 @@ import {
   postProduct,
   createProduct,
   putProduct,
-  updateProd,
+  replaceProduct,
   removeProduct,
   deleteProduct,
   seedProducts,
@@ -53,7 +53,7 @@ export const putMongo = async (req: Request, res: Response) => {
     return res.status(400).json({ message: `Error type Product` });
   }
 
-  const { success, updatedProduct } = await updateProduct(idParams, req.body);
+  const { success, updatedProduct } = await replaceProduct(idParams, req.body);
 
   if (success) {
     res.status(200).json(updatedProduct);
@@ -65,7 +65,7 @@ export const putMongo = async (req: Request, res: Response) => {
 export const patchMongo = async (req: Request, res: Response) => {
   const idParams = String(req.params.id);
 
-  const { success, updatedProduct } = await updateProd(idParams, req.body);
+  const { success, updatedProduct } = await updateProduct(idParams, req.body);
 
   if (success) {
     res.status(200).json(updatedProduct);
